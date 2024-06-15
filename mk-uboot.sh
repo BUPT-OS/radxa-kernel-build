@@ -36,8 +36,14 @@ generate_spi_image() {
 	parted -s $SPI_IMAGE unit s mkpart uboot_env 8128 8191
 	parted -s $SPI_IMAGE unit s mkpart reserved2 8192 16383
 	parted -s $SPI_IMAGE unit s mkpart uboot 16384 32734
-	dd if=${OUT}/u-boot/idbloader.img of=$SPI_IMAGE seek=64 conv=notrunc
-	dd if=${OUT}/u-boot/u-boot.itb of=$SPI_IMAGE seek=16384 conv=notrunc
+
+	if [ -e "${OUT}/u-boot/spi/idbloader.img" ] && [ -e "${OUT}/u-boot/spi/u-boot.itb" ]; then
+		dd if=${OUT}/u-boot/spi/idbloader.img of=$SPI_IMAGE seek=64 conv=notrunc
+		dd if=${OUT}/u-boot/spi/u-boot.itb of=$SPI_IMAGE seek=16384 conv=notrunc
+	else
+		dd if=${OUT}/u-boot/idbloader.img of=$SPI_IMAGE seek=64 conv=notrunc
+		dd if=${OUT}/u-boot/u-boot.itb of=$SPI_IMAGE seek=16384 conv=notrunc
+	fi
 }
 
 source $LOCALPATH/build/board_configs.sh $BOARD
@@ -370,6 +376,15 @@ elif [ "${CHIP}" == "rk3588s" ] || [ "${CHIP}" == "rk3588" ]; then
 	cp u-boot.itb ${OUT}/u-boot/
 	cp idbloader.img ${OUT}/u-boot/
 	cp ../rkbin/bin/rk35/rk3588_spl_loader_v1.15.113.bin ${OUT}/u-boot
+	if [ -n "$UBOOT_SPI_DEFCONFIG" ]; then
+		make distclean
+		make ${UBOOT_SPI_DEFCONFIG}
+		make BL31=../rkbin/bin/rk35/rk3588_bl31_v1.45.elf spl/u-boot-spl.bin u-boot.dtb u-boot.itb
+		./tools/mkimage -n rk3588 -T rksd -d ../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.16.bin:spl/u-boot-spl.bin idbloader.img
+		cp u-boot.itb ${OUT}/u-boot/spi/
+		cp idbloader.img ${OUT}/u-boot/spi/
+		cp ../rkbin/bin/rk35/rk3588_spl_loader_v1.15.113.bin ${OUT}/u-boot/spi/
+	fi
 	generate_spi_image
 fi
 
