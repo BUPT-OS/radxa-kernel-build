@@ -51,28 +51,16 @@ if [ ! -f "${EXTLINUXPATH}/${CHIP}.conf" ]; then
 	CHIP="rk3288"
 fi
 
-if [[ "${CHIP}" == "rk3308" ]]; then
-	source $LOCALPATH/build/rockpis-partitions.sh
-fi
-
 generate_boot_image() {
 	BOOT=${OUT}/boot.img
 	rm -rf ${BOOT}
 
 	echo -e "\e[36m Generate Boot image start\e[0m"
 
-	if [[ "${CHIP}" == "rk3308" ]]; then
-		# 100MB
-		mkfs.vfat -n "boot" -S 512 -C ${BOOT} $((100 * 1024))
-	else
-		# 500Mb
-		mkfs.vfat -n "boot" -S 512 -C ${BOOT} $((500 * 1024))
-	fi
+	mkfs.vfat -n "boot" -S 512 -C ${BOOT} $((100 * 1024))
 
 	mmd -i ${BOOT} ::/extlinux
-	if [ "${BOARD}" == "rockpi4a" ] || [ "${BOARD}" == "rockpi4b" ] ||  [ "${BOARD}" == "rockpis" ] ; then
-		mmd -i ${BOOT} ::/overlays
-	fi
+	mmd -i ${BOOT} ::/overlays
 
 	mcopy -i ${BOOT} -s ${EXTLINUXPATH}/${CHIP}.conf ::/extlinux/extlinux.conf
 	mcopy -i ${BOOT} -s ${OUT}/kernel/* ::
