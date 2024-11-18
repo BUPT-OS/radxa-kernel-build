@@ -19,6 +19,7 @@ fi
 
 [ ! -d ${OUT} ] && mkdir ${OUT}
 [ ! -d ${OUT}/kernel ] && mkdir ${OUT}/kernel
+[ ! -d ${OUT}/rootfs ] && mkdir ${OUT}/rootfs
 
 source $LOCALPATH/build/board_configs.sh $BOARD
 
@@ -45,6 +46,8 @@ cd ${LOCALPATH}/kernel
 [ ! -e .config ] && echo -e "\e[36m Using ${DEFCONFIG} \e[0m" && make ${DEFCONFIG}
 
 make -j8
+make modules_install INSTALL_MOD_PATH=${OUT}/rootfs
+
 cd ${LOCALPATH}
 
 if [ "${ARCH}" == "arm" ]; then
