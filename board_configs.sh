@@ -306,6 +306,14 @@ case ${BOARD} in
 		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3568"
 		;;
+	"radxa-cm4-raspcm4io")
+		DEFCONFIG=rockchip_linux_defconfig
+		UBOOT_DEFCONFIG=radxa-cm4-rpi-cm4-io-rk3576_defconfig
+		DTB=rk3576-radxa-cm4-rpi-cm4-io.dtb
+		export ARCH=arm64
+		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		CHIP="rk3576"
+		;;
 	"radxa-cm5-io")
 		DEFCONFIG=rockchip_linux_defconfig
 		UBOOT_DEFCONFIG=radxa-cm5-io-rk3588s_defconfig
