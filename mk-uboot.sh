@@ -372,7 +372,16 @@ elif [ "${CHIP}" == "rk3568" ]; then
 elif [ "${CHIP}" == "rk3576" ]; then
 	make ${UBOOT_DEFCONFIG}
 	make BL31=../rkbin/bin/rk35/rk3576_bl31_v1.12.elf spl/u-boot-spl.bin u-boot.dtb u-boot.itb
-	./tools/mkimage -n rk3576 -T rksd -d ../rkbin/bin/rk35/rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.08.bin:spl/u-boot-spl.bin idbloader.img
+
+	cp ../rkbin/RKBOOT/RK3576MINIALL.ini .
+	sed -i "s|FlashBoost=.*$|FlashBoost=../rkbin/bin/rk35/rk3576_boost_v1.02.bin|g" RK3576MINIALL.ini
+	sed -i "s|Path1=.*rk3576_ddr.*$|Path1=../rkbin/bin/rk35/rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.08.bin|g" RK3576MINIALL.ini
+	sed -i "s|Path1=.*rk3576_usbplug.*$|Path1=../rkbin/bin/rk35/rk3576_usbplug_v1.03.bin|g" RK3576MINIALL.ini
+	sed -i "s|FlashData=.*$|FlashData=../rkbin/bin/rk35/rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.08.bin|g" RK3576MINIALL.ini
+	sed -i "s|FlashBoot=.*$|FlashBoot=./spl/u-boot-spl.bin|g" RK3576MINIALL.ini
+	sed -i "s|IDB_PATH=.*$|IDB_PATH=idbloader.img|g" RK3576MINIALL.ini
+	../rkbin/tools/boot_merger RK3576MINIALL.ini
+
 	cp u-boot.itb ${OUT}/u-boot/
 	cp idbloader.img ${OUT}/u-boot/
 	cp ../rkbin/bin/rk35/rk3576_spl_loader_v1.08.106.bin ${OUT}/u-boot/
