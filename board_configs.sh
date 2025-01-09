@@ -239,7 +239,7 @@ case ${BOARD} in
 		UBOOT_DEFCONFIG=radxa-e20c-rk3528_defconfig
 		DTB=rk3528-radxa-e20c.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3528"
 		;;
 	"rock-2a")
@@ -247,7 +247,7 @@ case ${BOARD} in
 		UBOOT_DEFCONFIG=rock-2a-rk3528_defconfig
 		DTB=rk3528-rock-2a.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3528"
 		;;
 	"radxa-e23")
@@ -311,7 +311,7 @@ case ${BOARD} in
 		UBOOT_DEFCONFIG=radxa-cm4-rpi-cm4-io-rk3576_defconfig
 		DTB=rk3576-radxa-cm4-rpi-cm4-io.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3576"
 		;;
 	"radxa-cm5-io")
@@ -319,7 +319,7 @@ case ${BOARD} in
 		UBOOT_DEFCONFIG=radxa-cm5-io-rk3588s_defconfig
 		DTB=rk3588s-radxa-cm5-io.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588s"
 		;;
 	"radxa-cm5-raspcm4io")
@@ -335,7 +335,7 @@ case ${BOARD} in
 		UBOOT_DEFCONFIG=radxa-e52c-rk3588s_defconfig
 		DTB=rk3588s-radxa-e52c.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588s"
 		;;
 	"radxa-e54c")
@@ -344,7 +344,7 @@ case ${BOARD} in
 		UBOOT_SPI_DEFCONFIG=radxa-e54c-spi-rk3588s_defconfig
 		DTB=rk3588s-radxa-e54c.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588s"
 		;;
 	"radxa-nx5-io")
@@ -352,7 +352,7 @@ case ${BOARD} in
 		UBOOT_DEFCONFIG=radxa-nx5-iork3588s_defconfig
 		DTB=rk3588s-radxa-nx5-io.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588s"
 		;;
 	"rock-5a")
@@ -361,7 +361,7 @@ case ${BOARD} in
 		UBOOT_SPI_DEFCONFIG=rock-5a-spi-rk3588s_defconfig
 		DTB=rk3588s-rock-5a.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588s"
 		;;
 	"rock-5c")
@@ -370,7 +370,7 @@ case ${BOARD} in
 		UBOOT_SPI_DEFCONFIG=rock-5c-spi-rk3588s_defconfig
 		DTB=rk3588s-rock-5c.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588s"
 		;;
 	"rock-5d")
@@ -379,7 +379,7 @@ case ${BOARD} in
 		UBOOT_SPI_DEFCONFIG=rock-5d-spi-rk3588s_defconfig
 		DTB=rk3588s-rock-5d.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588s"
 		;;
 	"rock-5-itx")
@@ -387,7 +387,7 @@ case ${BOARD} in
 		UBOOT_DEFCONFIG=rock-5-itx-rk3588_defconfig
 		DTB=rk3588-rock-5-itx.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588"
 		;;
 	"rock-5b")
@@ -395,7 +395,7 @@ case ${BOARD} in
 		UBOOT_DEFCONFIG=rock-5b-rk3588_defconfig
 		DTB=rk3588-rock-5b.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588"
 		;;
 	"rock-5b-plus")
@@ -403,7 +403,7 @@ case ${BOARD} in
 		UBOOT_DEFCONFIG=rock-5b-plus-rk3588_defconfig
 		DTB=rk3588-rock-5b-plus.dtb
 		export ARCH=arm64
-		export CROSS_COMPILE=aarch64-none-linux-gnu-
+		export CROSS_COMPILE=aarch64-linux-gnu-
 		CHIP="rk3588"
 		;;
 	*)
