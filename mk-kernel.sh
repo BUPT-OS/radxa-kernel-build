@@ -5,6 +5,19 @@ OUT=${LOCALPATH}/out
 EXTLINUXPATH=${LOCALPATH}/build/extlinux
 BOARD=$1
 
+jobs=8
+while getopts "j:" opt; do
+  case $opt in
+    j)
+      jobs=$OPTARG
+      ;;
+    *)
+      echo "Usage: $0 [Board] -j<number>"
+      exit 1
+      ;;
+  esac
+done
+
 version_gt() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" != "$1"; }
 
 finish() {
@@ -45,7 +58,7 @@ fi
 cd ${LOCALPATH}/kernel
 [ ! -e .config ] && echo -e "\e[36m Using ${DEFCONFIG} \e[0m" && make ${DEFCONFIG}
 
-make -j8
+make -j$jobs
 make modules_install INSTALL_MOD_PATH=${OUT}/rootfs
 
 cd ${LOCALPATH}
