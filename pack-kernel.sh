@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "====USAGE: pack-kernel.sh -d <kernel defconfig> -r <release_number>===="
+    echo "====USAGE: pack-kernel.sh -d [kernel defconfig] -r <release_number>===="
     echo "pack-kernel.sh -d rockchip_linux_defconfig -r 1"
 }
 
@@ -16,7 +16,11 @@ while getopts "d:r:h" flag; do
     esac
 done
 
-if [ ! $KERNEL_DEFCONFIG ] && [ ! $RELEASE_NUMBER ]; then
+if [ ! $KERNEL_DEFCONFIG ]; then
+    echo "Use current .config instead".
+    export KERNEL_DEFCONFIG=""
+fi
+if  [ ! $RELEASE_NUMBER ]; then
     usage
     exit
 fi
@@ -34,7 +38,7 @@ if [ "X$(uname -m)" == "Xaarch64" ]; then
 fi
 
 echo -e "\e[31m Start to pack kernel. \e[0m"
-cd ${KERNEL_DIR} && make distclean && make -f $ROCKCHIP_BSP_DIR/build/kernel-package.mk kernel-package
+cd ${KERNEL_DIR} && make -f $ROCKCHIP_BSP_DIR/build/kernel-package.mk kernel-package
 
 mv $ROCKCHIP_BSP_DIR/linux-*${RELEASE_NUMBER}-rockchip*.deb $PACKAGES_DIR
 mv $ROCKCHIP_BSP_DIR/linux-*${RELEASE_NUMBER}-rockchip*.changes $PACKAGES_DIR

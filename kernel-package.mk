@@ -6,10 +6,16 @@ KERNEL_RELEASE ?= $(shell $(KERNEL_MAKE) -s kernelrelease)
 KDEB_PKGVERSION ?= $(KERNEL_VERSION)-$(RELEASE_NUMBER)-rockchip
 
 KERNEL_MAKE ?= make \
-	ARCH=arm64 
+	ARCH=arm64 \
+	CROSS_COMPILE=aarch64-linux-gnu
 
+ifneq ($(KERNEL_DEFCONFIG),)
 .config: arch/arm64/configs/$(KERNEL_DEFCONFIG)
 	$(KERNEL_MAKE) $(KERNEL_DEFCONFIG)
+else
+.config:
+	@echo "Skipping .config target because KERNEL_DEFCONFIG is not set."
+endif
 
 .PHONY: .scmversion
 .scmversion:

@@ -5,7 +5,7 @@ OUT=${LOCALPATH}/out
 EXTLINUXPATH=${LOCALPATH}/build/extlinux
 BOARD=$1
 
-jobs=8
+jobs=16
 while getopts "j:" opt; do
   case $opt in
     j)
