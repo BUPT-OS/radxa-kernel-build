@@ -7,7 +7,7 @@ KDEB_PKGVERSION ?= $(KERNEL_VERSION)-$(RELEASE_NUMBER)-rockchip
 
 KERNEL_MAKE ?= make \
 	ARCH=arm64 \
-	CROSS_COMPILE=aarch64-linux-gnu
+	CROSS_COMPILE=aarch64-linux-gnu-
 
 ifneq ($(KERNEL_DEFCONFIG),)
 .config: arch/arm64/configs/$(KERNEL_DEFCONFIG)
